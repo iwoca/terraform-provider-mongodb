@@ -72,12 +72,14 @@ Block mapping a user's role to a database / collection. A role allows the user t
 
 ## Import
 
-Mongodb users can be imported using the hex encoded id, e.g. for a user named `user_test` and his database id `test_db` :
+Mongodb users can be imported using the base64 encoded id, e.g. for a user named `user_test` and its auth database `test_db` :
 
 ```sh
 $ printf '%s' "test_db.user_test" | base64
-## this is the output of the command above it will encode db.username to HEX 
+## this is the output of the command above it will encode db.username to base64
 dGVzdF9kYi51c2VyX3Rlc3Q=
 
 $ terraform import mongodb_db_user.example_user  dGVzdF9kYi51c2VyX3Rlc3Q=
 ```
+
+Import reads `name`, `auth_database` and `role` from MongoDB. MongoDB never returns the password, so the first apply after an import updates the user in place with the configured `password`.
