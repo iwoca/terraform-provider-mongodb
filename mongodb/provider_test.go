@@ -11,7 +11,7 @@ var testAccProviderFactories map[string]func() (*schema.Provider, error)
 
 func init() {
 	testAccProviderFactories = map[string]func() (*schema.Provider, error){
-		"mongodb": func() (*schema.Provider, error) {
+		"mongodb": func() (*schema.Provider, error) { //nolint:unparam // signature required by resource.TestCase.ProviderFactories
 			return Provider(), nil
 		},
 	}
