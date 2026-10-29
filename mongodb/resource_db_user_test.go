@@ -20,6 +20,12 @@ func TestAccMongoDBUser_basic(t *testing.T) {
 					resource.TestCheckResourceAttr("mongodb_db_user.test", "auth_database", "admin"),
 				),
 			},
+			{
+				ResourceName:            "mongodb_db_user.test",
+				ImportState:             true,
+				ImportStateVerify:       true,
+				ImportStateVerifyIgnore: []string{"password"},
+			},
 		},
 	})
 }
